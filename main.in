@@ -3,19 +3,26 @@ boundary p p p
 units metal
 atom_style atomic
 
-lattice fcc 10
-region space block -20 20 -20 20 -20 20 units lattice
+lattice fcc 100
+region space block -10 10 -10 10 -10 10 units lattice
 create_box 1 space
 create_atoms 1 region space
 
-pair_style eam/alloy
-pair_coeff * * Au-Grochola-JCP05.eam.alloy Au
+pair_style eam/fs
+pair_coeff * * Au.eam.fs Au
 
-dump 10 all atom 1 *.dump
-thermo 100
+dump 1 all custom 10 *.dump id x y z vx vy vz fx fy fz
+thermo 10
 
-fix holdx all deform 1 x delta 0 0
-fix holdx all deform 1 x delta 0 0
-fix holdx all deform 1 x delta 0 0
+timestep 0.001
 
-minimize 1e-5 1e-7 1000 10000
+velocity all create 0.1 482748
+fix	3 all temp/rescale 100 0.1 0.1 0.001 .1
+
+#fix holdx all deform 1 x delta 0 0
+#fix holdx all deform 1 x delta 0 0
+#fix holdx all deform 1 x delta 0 0
+
+minimize 1e-4 1e-4 100 1000
+
+#run 1000
