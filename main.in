@@ -1,0 +1,15 @@
+boundary p p p
+
+units metal
+atom_style atomic
+
+lattice fcc 4.079
+region space block -20 20 -20 20 -20 20 units lattice
+create_box 1 space
+create_atoms 1 region space
+
+pair_style eam/alloy
+pair_coeff * * Au-Grochola-JCP05.eam.alloy Au
+
+dump 1 all atom 1 *.dump
+run 1

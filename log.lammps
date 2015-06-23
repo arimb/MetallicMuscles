@@ -1,0 +1,53 @@
+LAMMPS (21 Jan 2015-ICMS)
+WARNING: OMP_NUM_THREADS environment is not set. (../comm.cpp:89)
+  using 1 OpenMP thread(s) per MPI task
+boundary p p p
+
+units metal
+atom_style atomic
+
+lattice fcc 4.079
+Lattice spacing in x,y,z = 4.079 4.079 4.079
+region space block -20 20 -20 20 -20 20 units lattice
+create_box 1 space
+Created orthogonal box = (-81.58 -81.58 -81.58) to (81.58 81.58 81.58)
+  1 by 1 by 1 MPI processor grid
+create_atoms 1 region space
+Created 256000 atoms
+
+pair_style eam/alloy
+pair_coeff * * Au-Grochola-JCP05.eam.alloy Au
+
+dump 1 all atom 1 *.dump
+run 1
+WARNING: No fixes defined, atoms won't move (../verlet.cpp:55)
+Memory usage per processor = 72.7787 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -1004495.8            0   -1004495.8   -11714.259 
+       1            0   -1004495.8            0   -1004495.8   -11714.259 
+
+Loop time of 1.37981 on 1 procs for 1 steps with 256000 atoms
+93.8% CPU use with 1 MPI tasks x 1 OpenMP threads
+Performance: 0.063 ns/day  383.280 hours/ns  0.725 timesteps/s
+
+MPI task timings breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.69397    | 0.69397    | 0.69397    |   0.0 | 50.29
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0035903  | 0.0035903  | 0.0035903  |   0.0 |  0.26
+Output  | 0.68026    | 0.68026    | 0.68026    |   0.0 | 49.30
+Modify  | 1.4665e-006| 1.4665e-006| 1.4665e-006|   0.0 |  0.00
+Other   |            | 0.001985   |            |       |  0.14
+
+Nlocal:    256000 ave 256000 max 256000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    73251 ave 73251 max 73251 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    1.1008e+007 ave 1.1008e+007 max 1.1008e+007 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 11008000
+Ave neighs/atom = 43
+Neighbor list builds = 0
+Dangerous builds = 0
