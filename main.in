@@ -1,0 +1,9 @@
+boundary p p p
+
+units metal
+atom_style atomic
+
+lattice fcc 4.079
+region space block -50 50 -50 50 -50 50 units lattice
+create_box 1 space
+create_atoms 1 region space
